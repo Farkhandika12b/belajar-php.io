@@ -1,18 +1,21 @@
 <?php
-// mengambil data dari form login
-$username = $_POST['username'];
-$password = $_POST['password'];
+session_start();
 
-// asumsikan username dan password yang valid adalah "admin"
-$valid_username = "admin";
-$valid_password = "admin";
+// User dan password statis
+$validUsername = "user";
+$validPassword = "password";
 
-// cek apakah username dan password yang dimasukkan valid
-if ($username == $valid_username && $password == $valid_password) {
-    // jika valid, redirect ke halaman utama
-    header('Location: index.php');
+// Ambil username dan password dari formulir login
+$username = $_POST["username"];
+$password = $_POST["password"];
+
+// Periksa apakah autentikasi berhasil
+if ($username === $validUsername && $password === $validPassword) {
+    $_SESSION["username"] = $username;
+    header("Location: dashboard.php");
+    exit();
 } else {
-    // jika tidak valid, redirect kembali ke halaman login
-    header('Location: login.php');
+    header("Location: login.php");
+    exit();
 }
 ?>
